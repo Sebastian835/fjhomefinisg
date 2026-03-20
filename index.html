@@ -1,1 +1,1741 @@
-HOLA MUNDO
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F&J Home Finish | Finishing Homes with Excellence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="img/logo.ico" type="image/png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --cream: #F5F0E8;
+            --cream-dark: #EDE5D4;
+            --teal: #1D6A6A;
+            --teal-light: #2A8A8A;
+            --teal-dark: #124444;
+            --gold: #C9962B;
+            --gold-light: #E8B84B;
+            --charcoal: #1A1A1A;
+            --slate: #3D4A4A;
+            --text-light: #6B7A7A;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        /* ── NOISE TEXTURE OVERLAY ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.3;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 5%;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(245, 240, 232, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(29, 106, 106, 0.12);
+            transition: box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 44px;
+            width: auto;
+        }
+
+        .nav-logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .nav-logo-text .brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--teal-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo-text .sub {
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            color: var(--gold);
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 36px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--slate);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 100%;
+            height: 1.5px;
+            background: var(--gold);
+            transition: right 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--teal);
+        }
+
+        .nav-links a:hover::after {
+            right: 0;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--teal-dark);
+            transition: all 0.3s;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ── HERO ── */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--teal-dark);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 50%, rgba(29, 106, 106, 0.4) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 80% at 10% 80%, rgba(201, 150, 43, 0.15) 0%, transparent 60%),
+                linear-gradient(135deg, #0E2E2E 0%, #1A4040 40%, #124444 100%);
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(-45deg,
+                    rgba(201, 150, 43, 0.04) 0px,
+                    rgba(201, 150, 43, 0.04) 1px,
+                    transparent 1px,
+                    transparent 40px);
+        }
+
+        .hero-img-side {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 45%;
+            overflow: hidden;
+        }
+
+        .hero-img-side::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--teal-dark) 0%, transparent 30%);
+            z-index: 1;
+        }
+
+        .hero-img-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 140px 5% 80px;
+            max-width: 720px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1.5px;
+            background: var(--gold);
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            line-height: 1.0;
+            color: var(--cream);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2vw, 1.45rem);
+            color: rgba(245, 240, 232, 0.7);
+            margin-bottom: 28px;
+            font-style: italic;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: rgba(245, 240, 232, 0.6);
+            max-width: 480px;
+            margin-bottom: 40px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stat .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            line-height: 1;
+        }
+
+        .hero-stat .label {
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(245, 240, 232, 0.5);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .hero-stat-divider {
+            width: 1px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.12);
+            align-self: center;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gold);
+            color: var(--charcoal);
+            padding: 16px 36px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gold-light);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-primary span,
+        .btn-primary i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 30px rgba(201, 150, 43, 0.4);
+        }
+
+        /* ── SECTION COMMONS ── */
+        section {
+            padding: 100px 5%;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            color: var(--teal-dark);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .title-line {
+            display: block;
+            width: 48px;
+            height: 3px;
+            background: linear-gradient(to right, var(--gold), var(--gold-light));
+            margin-top: 16px;
+        }
+
+        /* ── ABOUT ── */
+        #about {
+            background: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+            margin-top: 60px;
+        }
+
+        .about-left {
+            position: relative;
+        }
+
+        .about-img-stack {
+            position: relative;
+            height: 480px;
+        }
+
+        .about-img-main {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80%;
+            height: 380px;
+            object-fit: cover;
+        }
+
+        .about-img-accent {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 55%;
+            height: 240px;
+            object-fit: cover;
+            border: 6px solid var(--white);
+        }
+
+        .about-badge {
+            position: absolute;
+            top: 24px;
+            right: 5%;
+            background: var(--teal-dark);
+            color: var(--gold-light);
+            padding: 18px 22px;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .about-badge .big {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1;
+        }
+
+        .about-badge .small {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(232, 184, 75, 0.7);
+        }
+
+        .about-right {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding-top: 8px;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--slate);
+            margin-bottom: 16px;
+        }
+
+        .about-divider {
+            height: 1px;
+            background: linear-gradient(to right, var(--teal-light), transparent);
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .mv-card {
+            padding: 24px;
+            background: var(--cream);
+            border-left: 3px solid var(--gold);
+        }
+
+        .mv-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--teal-dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mv-card h4 i {
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .mv-card p {
+            font-size: 0.88rem;
+            line-height: 1.75;
+            color: var(--text-light);
+        }
+
+        /* ── BENEFITS ── */
+        #benefits {
+            background: var(--teal-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #benefits::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 150, 43, 0.07) 0%, transparent 70%);
+        }
+
+        #benefits .section-title {
+            color: var(--cream);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 60px;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(201, 150, 43, 0.12);
+            padding: 40px 32px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .benefit-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-4px);
+        }
+
+        .benefit-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .benefit-icon {
+            width: 54px;
+            height: 54px;
+            background: rgba(201, 150, 43, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .benefit-icon i {
+            font-size: 1.4rem;
+            color: var(--gold-light);
+        }
+
+        .benefit-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--cream);
+            margin-bottom: 10px;
+        }
+
+        .benefit-card p {
+            font-size: 0.87rem;
+            line-height: 1.75;
+            color: rgba(245, 240, 232, 0.55);
+        }
+
+        /* ── SERVICES ── */
+        #services {
+            background: var(--cream-dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: var(--white);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 20px 60px rgba(29, 106, 106, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .service-card-top {
+            height: 6px;
+            background: linear-gradient(to right, var(--teal), var(--teal-light));
+        }
+
+        .service-card-body {
+            padding: 36px;
+            flex: 1;
+        }
+
+        .service-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: rgba(29, 106, 106, 0.07);
+            line-height: 1;
+            margin-bottom: -12px;
+            letter-spacing: -0.04em;
+        }
+
+        .service-icon-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .service-icon-circle {
+            width: 44px;
+            height: 44px;
+            background: var(--teal-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .service-icon-circle i {
+            font-size: 1rem;
+            color: var(--gold-light);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--teal-dark);
+            font-weight: 700;
+        }
+
+        .service-card p {
+            font-size: 0.87rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .service-tag {
+            background: rgba(29, 106, 106, 0.07);
+            color: var(--teal);
+            font-size: 0.72rem;
+            padding: 5px 12px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── GALLERY ── */
+        #gallery {
+            background: var(--charcoal);
+            padding: 100px 0;
+        }
+
+        .gallery-header {
+            padding: 0 5%;
+            margin-bottom: 48px;
+        }
+
+        .gallery-header .section-label {
+            color: var(--gold);
+        }
+
+        .gallery-header .section-title {
+            color: var(--cream);
+        }
+
+        .gallery-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .gallery-track-wrapper {
+            overflow: hidden;
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            height: 560px;
+            position: relative;
+            background: #111;
+            /* fondo negro para las "barras" */
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* contiene toda la imagen sin recortar */
+            display: block;
+        }
+
+        .gallery-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 60%);
+        }
+
+        .gallery-controls {
+            position: absolute;
+            bottom: 28px;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .gallery-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(201, 150, 43, 0.85);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--charcoal);
+            font-size: 1rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(4px);
+        }
+
+        .gallery-btn:hover {
+            background: var(--gold);
+            transform: scale(1.05);
+        }
+
+        .gallery-counter {
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--cream);
+            font-size: 0.78rem;
+            letter-spacing: 0.15em;
+            padding: 10px 18px;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ── CONTACT ── */
+        #contact {
+            background: var(--cream);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            margin-top: 60px;
+            align-items: start;
+        }
+
+        .contact-left {}
+
+        .contact-info {
+            margin-bottom: 40px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(29, 106, 106, 0.1);
+        }
+
+        .contact-info-item:first-child {
+            border-top: 1px solid rgba(29, 106, 106, 0.1);
+        }
+
+        .contact-info-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--teal-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .contact-info-icon i {
+            font-size: 0.9rem;
+            color: var(--gold-light);
+        }
+
+        .contact-info-text .label {
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .contact-info-text .value {
+            font-size: 0.97rem;
+            color: var(--charcoal);
+            font-weight: 500;
+        }
+
+        .contact-owner {
+            background: var(--teal-dark);
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 36px;
+        }
+
+        .owner-avatar {
+            width: 52px;
+            height: 52px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            flex-shrink: 0;
+        }
+
+        .owner-info .name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--cream);
+            font-weight: 600;
+        }
+
+        .owner-info .title {
+            font-size: 0.75rem;
+            color: rgba(201, 150, 43, 0.8);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        /* Contact Buttons */
+        .contact-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 0;
+        }
+
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn i {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .cta-btn span {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cta-btn .btn-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.75;
+            margin-bottom: 2px;
+        }
+
+        .cta-btn .btn-val {
+            font-size: 0.88rem;
+        }
+
+        .cta-call {
+            background: var(--teal-dark);
+            color: var(--cream);
+        }
+
+        .cta-call:hover {
+            background: var(--teal);
+            box-shadow: 0 8px 24px rgba(29, 106, 106, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .cta-wa {
+            background: #1A7A3A;
+            color: var(--white);
+        }
+
+        .cta-wa:hover {
+            background: #22A04A;
+            box-shadow: 0 8px 24px rgba(26, 122, 58, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .cta-email {
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+
+        .cta-email:hover {
+            background: var(--gold-light);
+            box-shadow: 0 8px 24px rgba(201, 150, 43, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .cta-sms {
+            background: var(--slate);
+            color: var(--cream);
+        }
+
+        .cta-sms:hover {
+            background: var(--charcoal);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .contact-right {}
+
+        .map-container {
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+            border: 4px solid var(--white);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .map-label {
+            margin-top: 16px;
+            padding: 14px 18px;
+            background: var(--teal-dark);
+            color: var(--cream);
+            font-size: 0.83rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .map-label i {
+            color: var(--gold-light);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #0A1F1F;
+            padding: 56px 5% 32px;
+            color: rgba(245, 240, 232, 0.6);
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 56px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand img {
+            height: 52px;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand .tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            color: rgba(245, 240, 232, 0.55);
+            font-size: 0.87rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding-top: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+        }
+
+        .footer-tagline-bottom {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .about-img-stack {
+                height: 320px;
+            }
+
+            .about-img-main {
+                width: 90%;
+                height: 280px;
+            }
+
+            .about-img-accent {
+                bottom: 0;
+                right: 0;
+                width: 50%;
+                height: 180px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: rgba(245, 240, 232, 0.97);
+                flex-direction: column;
+                padding: 24px 5%;
+                gap: 0;
+                border-top: 1px solid rgba(29, 106, 106, 0.1);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li {
+                border-bottom: 1px solid rgba(29, 106, 106, 0.08);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 14px 0;
+                font-size: 0.9rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                gap: 24px;
+            }
+
+            .hero-stat-divider {
+                display: none;
+            }
+
+            .contact-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-slide {
+                height: 320px;
+            }
+
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── ANIMATIONS ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav id="mainNav">
+        <a href="#home" class="nav-logo">
+            <img src="img/logo.png" alt="F&J Home Finish Logo" onerror="this.style.display='none'">
+            <div class="nav-logo-text">
+                <span class="brand">F&amp;J Home Finish</span>
+                <span class="sub">Antioch, Tennessee</span>
+            </div>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-pattern"></div>
+        <div class="hero-img-side">
+            <img src="img/1.jpg" alt="F&J Home Finish Work">
+        </div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">Antioch, Tennessee</div>
+            <h1 class="hero-title">
+                F&amp;J <em>Home</em><br>Finish
+            </h1>
+            <p class="hero-tagline">"Finishing Homes with Excellence."</p>
+            <p class="hero-desc">
+                Professional home improvement and cleaning services for residential and commercial properties across
+                Tennessee. Quality craftsmanship in every detail, every project.
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="num">20+</span>
+                    <span class="label">Years Experience</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="num">100%</span>
+                    <span class="label">Quality Guaranteed</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="num">5★</span>
+                    <span class="label">Professional Service</span>
+                </div>
+            </div>
+            <a href="#contact" class="btn-primary">
+                <span>Get a Free Estimate</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">Built on Trust,<br><em>Driven by Excellence</em></h2>
+        <span class="title-line"></span>
+
+        <div class="about-grid">
+            <div class="about-left reveal">
+                <div class="about-img-stack">
+                    <img class="about-img-main" src="img/2.jpg" alt="F&J Work"
+                        onerror="this.src='https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80'">
+                    <img class="about-img-accent" src="img/3.jpg" alt="F&J Work Detail"
+                        onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'">
+                </div>
+                <div class="about-badge">
+                    <span class="big">20</span>
+                    <span class="small">Years of<br>Experience</span>
+                </div>
+            </div>
+
+            <div class="about-right reveal reveal-delay-2">
+                <div class="about-text">
+                    <p>
+                        F&amp;J Home Finish is a locally operated business led by <strong>Florencio Jose Sosa</strong>.
+                        With decades of hands-on experience, we provide dependable and detail-oriented services tailored
+                        to meet each client's unique needs.
+                    </p>
+                    <p>
+                        We understand that every property requires care, precision, and professionalism. That's why we
+                        focus on delivering consistent results, using the right techniques to ensure long-lasting
+                        quality and customer satisfaction. Our goal is to build long-term relationships through trust,
+                        reliability, and excellent service.
+                    </p>
+                </div>
+
+                <div class="about-divider"></div>
+
+                <div class="mission-vision">
+                    <div class="mv-card">
+                        <h4><i class="fas fa-bullseye"></i> Our Mission</h4>
+                        <p>To provide professional remodeling, painting, and cleaning services that create clean,
+                            functional, and visually appealing spaces — committed to quality workmanship, reliability,
+                            and customer satisfaction.</p>
+                    </div>
+                    <div class="mv-card">
+                        <h4><i class="fas fa-eye"></i> Our Vision</h4>
+                        <p>To become a trusted home improvement and cleaning service provider in Tennessee, known for
+                            quality finishes, dependable service, and strong, lasting customer relationships.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section id="benefits">
+        <div class="section-label" style="color: var(--gold-light);">Why Choose Us</div>
+        <h2 class="section-title">The F&amp;J<br><em>Difference</em></h2>
+        <span class="title-line"></span>
+
+        <div class="benefits-grid">
+            <div class="benefit-card reveal">
+                <div class="benefit-icon"><i class="fas fa-medal"></i></div>
+                <h3>20 Years of Experience</h3>
+                <p>Two decades of hands-on expertise across residential and commercial properties in Tennessee,
+                    delivering results that stand the test of time.</p>
+            </div>
+            <div class="benefit-card reveal reveal-delay-1">
+                <div class="benefit-icon"><i class="fas fa-shield-halved"></i></div>
+                <h3>Reliable & Professional</h3>
+                <p>We show up on time, communicate clearly, and complete every job with the professionalism your
+                    property deserves — no exceptions.</p>
+            </div>
+            <div class="benefit-card reveal reveal-delay-2">
+                <div class="benefit-icon"><i class="fas fa-star"></i></div>
+                <h3>High-Quality Finishes</h3>
+                <p>Every detail matters. From the first coat of paint to the final touch, we use the right techniques
+                    for flawless, long-lasting finishes.</p>
+            </div>
+            <div class="benefit-card reveal reveal-delay-1">
+                <div class="benefit-icon"><i class="fas fa-th-large"></i></div>
+                <h3>Wide Range of Services</h3>
+                <p>From painting and remodeling to pressure washing and deep cleaning — we cover all your home
+                    improvement needs under one roof.</p>
+            </div>
+            <div class="benefit-card reveal reveal-delay-2">
+                <div class="benefit-icon"><i class="fas fa-handshake"></i></div>
+                <h3>Customer Satisfaction First</h3>
+                <p>Your satisfaction drives everything we do. We listen, adapt, and work tirelessly until you're fully
+                    satisfied with every project.</p>
+            </div>
+            <div class="benefit-card reveal reveal-delay-3">
+                <div class="benefit-icon"><i class="fas fa-home"></i></div>
+                <h3>Residential & Commercial</h3>
+                <p>Whether it's a single apartment or a multi-unit building, we bring the same level of care, precision,
+                    and excellence to every property.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title">Core <em>Services</em></h2>
+        <span class="title-line"></span>
+
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-card-top"></div>
+                <div class="service-card-body">
+                    <div class="service-num">01</div>
+                    <div class="service-icon-row">
+                        <div class="service-icon-circle"><i class="fas fa-paint-roller"></i></div>
+                        <h3>Painting &amp; Finishing</h3>
+                    </div>
+                    <p>Professional interior and commercial painting services with meticulous surface preparation,
+                        precise trim work, and flawless detail finishing for every space.</p>
+                    <div class="service-tags">
+                        <span class="service-tag">Interior Painting</span>
+                        <span class="service-tag">Common Area Repainting</span>
+                        <span class="service-tag">Surface Prep</span>
+                        <span class="service-tag">Trim &amp; Detail Finishing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card reveal reveal-delay-1">
+                <div class="service-card-top"></div>
+                <div class="service-card-body">
+                    <div class="service-num">02</div>
+                    <div class="service-icon-row">
+                        <div class="service-icon-circle"><i class="fas fa-building"></i></div>
+                        <h3>Multi-Unit &amp; Building Renovations</h3>
+                    </div>
+                    <p>Specialized renovation services for apartment complexes, covering turnovers, interior
+                        renovations, common area upgrades, hallways, lobbies, and stairwells.</p>
+                    <div class="service-tags">
+                        <span class="service-tag">Apartment Turnovers</span>
+                        <span class="service-tag">Common Areas</span>
+                        <span class="service-tag">Hallway &amp; Lobby</span>
+                        <span class="service-tag">Stairwell Renovations</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-card-top"></div>
+                <div class="service-card-body">
+                    <div class="service-num">03</div>
+                    <div class="service-icon-row">
+                        <div class="service-icon-circle"><i class="fas fa-hammer"></i></div>
+                        <h3>General Construction</h3>
+                    </div>
+                    <p>Complete general construction services including framing, drywall installation and finishing,
+                        flooring, door and window installation, carpentry, and structural improvements.</p>
+                    <div class="service-tags">
+                        <span class="service-tag">Framing</span>
+                        <span class="service-tag">Drywall</span>
+                        <span class="service-tag">Flooring</span>
+                        <span class="service-tag">Carpentry</span>
+                        <span class="service-tag">Doors &amp; Windows</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card reveal reveal-delay-1">
+                <div class="service-card-top"></div>
+                <div class="service-card-body">
+                    <div class="service-num">04</div>
+                    <div class="service-icon-row">
+                        <div class="service-icon-circle"><i class="fas fa-spray-can-sparkles"></i></div>
+                        <h3>Pressure Washing &amp; Cleaning</h3>
+                    </div>
+                    <p>Powerful exterior cleaning for driveways, sidewalks, walls, patios, and outdoor surfaces. Also
+                        deep cleaning, move-out/in cleaning, and post-construction cleanup.</p>
+                    <div class="service-tags">
+                        <span class="service-tag">Pressure Washing</span>
+                        <span class="service-tag">Deep Cleaning</span>
+                        <span class="service-tag">Move-Out Cleaning</span>
+                        <span class="service-tag">Post-Construction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+        <div class="gallery-header">
+            <div class="section-label">Our Work</div>
+            <h2 class="section-title">Work in <em>Progress &amp; Completed</em></h2>
+            <span class="title-line"></span>
+        </div>
+
+        <div class="gallery-carousel">
+            <div class="gallery-track-wrapper">
+                <div class="gallery-track" id="galleryTrack">
+                    <div class="gallery-slide"><img src="img/1.jpg" alt="F&J Work 1"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/2.jpg" alt="F&J Work 2"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/3.jpg" alt="F&J Work 3"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/4.jpg" alt="F&J Work 4"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/5.jpg" alt="F&J Work 5"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/6.jpg" alt="F&J Work 6"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/7.jpg" alt="F&J Work 7"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/8.jpg" alt="F&J Work 8"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/9.jpg" alt="F&J Work 9"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/10.jpg" alt="F&J Work 10"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/11.jpg" alt="F&J Work 11"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/12.jpg" alt="F&J Work 12"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/13.jpg" alt="F&J Work 13"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/14.jpg" alt="F&J Work 14"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                    <div class="gallery-slide"><img src="img/15.jpg" alt="F&J Work 15"
+                            onerror="this.parentElement.style.background='#2A3A3A'"></div>
+                </div>
+            </div>
+
+            <div class="gallery-controls">
+                <button class="gallery-btn" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="gallery-counter" id="galleryCounter">1 / 15</div>
+                <button class="gallery-btn" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-title">Let's Start Your<br><em>Project Today</em></h2>
+        <span class="title-line"></span>
+
+        <div class="contact-grid">
+            <div class="contact-left reveal">
+
+                <div class="contact-owner">
+                    <div class="owner-avatar">FJ</div>
+                    <div class="owner-info">
+                        <div class="name">Florencio Jose Sosa</div>
+                        <div class="title">Owner &amp; Lead Professional</div>
+                    </div>
+                </div>
+
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-info-text">
+                            <div class="label">Phone</div>
+                            <div class="value">910-336-1586</div>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-info-text">
+                            <div class="label">Email</div>
+                            <div class="value">joseflorencio540@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon"><i class="fas fa-location-dot"></i></div>
+                        <div class="contact-info-text">
+                            <div class="label">Address</div>
+                            <div class="value">6476 Paddington Way, Antioch, TN 37013</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-buttons">
+                    <a href="tel:9103361586" class="cta-btn cta-call">
+                        <i class="fas fa-phone"></i>
+                        <span>
+                            <span class="btn-label">Call Us</span>
+                            <span class="btn-val">910-336-1586</span>
+                        </span>
+                    </a>
+                    <a href="https://wa.me/19103361586" class="cta-btn cta-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>
+                            <span class="btn-label">WhatsApp</span>
+                            <span class="btn-val">Message Us</span>
+                        </span>
+                    </a>
+                    <a href="mailto:joseflorencio540@gmail.com" class="cta-btn cta-email">
+                        <i class="fas fa-envelope"></i>
+                        <span>
+                            <span class="btn-label">Email</span>
+                            <span class="btn-val">Send Message</span>
+                        </span>
+                    </a>
+                    <a href="sms:9103361586" class="cta-btn cta-sms">
+                        <i class="fas fa-comment-sms"></i>
+                        <span>
+                            <span class="btn-label">Text / SMS</span>
+                            <span class="btn-val">Quick Message</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-right reveal reveal-delay-2">
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3222.4527!2d-86.6233!3d36.0659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886466e0e0e0e0e0%3A0x0!2s6476+Paddington+Way%2C+Antioch%2C+TN+37013!5e0!3m2!1sen!2sus!4v1710000000000"
+                        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="map-label">
+                    <i class="fas fa-location-dot"></i>
+                    6476 Paddington Way, Antioch, TN 37013
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="img/logo.png" alt="F&J Home Finish" onerror="this.style.display='none'">
+                <div class="tagline">"Finishing Homes with Excellence."</div>
+                <p>Professional home improvement and cleaning services based in Antioch, Tennessee. Serving residential
+                    and commercial clients with dedication and craftsmanship.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">Painting &amp; Finishing</a></li>
+                    <li><a href="#services">Building Renovations</a></li>
+                    <li><a href="#services">General Construction</a></li>
+                    <li><a href="#services">Pressure Washing</a></li>
+                    <li><a href="#services">Deep Cleaning</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 F&amp;J Home Finish. All rights reserved. | Antioch, TN 37013</p>
+            <div class="footer-tagline-bottom">"Finishing Homes with Excellence."</div>
+        </div>
+    </footer>
+
+    <script>
+        // ── NAV SCROLL
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // ── HAMBURGER
+        function toggleMenu() {
+            const links = document.getElementById('navLinks');
+            const ham = document.getElementById('hamburger');
+            links.classList.toggle('open');
+            ham.classList.toggle('open');
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(a => {
+            a.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+                document.getElementById('hamburger').classList.remove('open');
+            });
+        });
+
+        // ── GALLERY
+        let currentIndex = 0;
+        const totalSlides = 15;
+
+        function updateCounter() {
+            document.getElementById('galleryCounter').textContent = `${currentIndex + 1} / ${totalSlides}`;
+        }
+
+        function showSlide(index) {
+            const track = document.getElementById('galleryTrack');
+            currentIndex = index;
+            if (currentIndex >= totalSlides) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = totalSlides - 1;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateCounter();
+        }
+
+        function moveSlide(direction) { showSlide(currentIndex + direction); }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft') moveSlide(-1);
+            if (e.key === 'ArrowRight') moveSlide(1);
+        });
+
+        let touchStartX = 0;
+        const track = document.getElementById('galleryTrack');
+        track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+        track.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].screenX - touchStartX;
+            if (dx < -50) moveSlide(1);
+            if (dx > 50) moveSlide(-1);
+        });
+
+        // Auto-advance
+        setInterval(() => moveSlide(1), 5000);
+
+        // ── REVEAL ON SCROLL
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
